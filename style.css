@@ -42,19 +42,19 @@ h3 {
   color: #0b1f3a;
 }
 
+/* Homework 3: Flexbox nav. Links stack on phones and sit in a row
+   from 768px up (see the @media query at the bottom). */
 nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   margin: 16px 0 0;
   padding: 0;
   list-style: none;
 }
 
-nav li {
-  display: inline-block;
-  margin: 4px 6px;
-}
-
 nav a {
-  display: inline-block;
+  display: block;
   padding: 6px 14px;
   color: #ffffff;
   text-decoration: none;
@@ -73,7 +73,7 @@ a {
 
 /* Box model: margin centers the content, padding gives breathing room */
 main {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 30px auto;
   padding: 0 20px;
 }
@@ -153,4 +153,61 @@ footer a {
 
 #goals a {
   color: #f28c28;
+}
+
+/* ==========================================================
+   Homework 3: Responsive Layout
+   Mobile first: everything above is one column, which works
+   at 320px. CSS Grid turns the "What Cybersecurity Is"
+   section into a multi-column layout on wider screens.
+   ========================================================== */
+
+#what {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 20px;
+}
+
+/* The heading and intro paragraph always span the full width */
+#what h2,
+#what > p {
+  grid-column: 1 / -1;
+}
+
+#what .card {
+  margin: 0 0 20px;
+}
+
+/* ---------- Tablet and up: 768px ---------- */
+@media (min-width: 768px) {
+  /* Nav links sit side by side in a row */
+  nav ul {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* The two cards become two columns */
+  #what {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ---------- Desktop: 1200px ---------- */
+@media (min-width: 1200px) {
+  /* About Me text and the picture sit side by side */
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 32px;
+    align-items: center;
+  }
+
+  #about h2 {
+    grid-column: 1 / -1;
+  }
+
+  #about figure {
+    margin-top: 0;
+  }
 }
